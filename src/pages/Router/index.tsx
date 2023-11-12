@@ -4,16 +4,26 @@ import Home from '../Home';
 import SignIn from 'pages/SignIn';
 import PortfolioWrite from 'pages/Portfolio/Write';
 
-function Router(): JSX.Element {
-  //   const [isAuth, setIsAuth] = useState<boolean>(false);
+interface Props {
+  isAuthenticated: boolean;
+}
+
+function Router({ isAuthenticated }: Props): JSX.Element {
   return (
     <>
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="*" element={<Home />}></Route>
-        <Route path="/signin" element={<SignIn />}></Route>
-        <Route path="/portfolio/write" element={<PortfolioWrite />}></Route>
-      </Routes>
+      {!isAuthenticated ? (
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="*" element={<Home />}></Route>
+          <Route path="/signin" element={<SignIn />}></Route>
+        </Routes>
+      ) : (
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="*" element={<Home />}></Route>
+          <Route path="/portfolio/write" element={<PortfolioWrite />}></Route>
+        </Routes>
+      )}
     </>
   );
 }
