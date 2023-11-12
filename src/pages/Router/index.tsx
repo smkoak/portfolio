@@ -16,11 +16,13 @@ function Router({ isAuthenticated }: Props): JSX.Element {
           <Route path="/" element={<Home />}></Route>
           <Route path="*" element={<Home />}></Route>
           <Route path="/signin" element={<SignIn />}></Route>
+          <Route path="/portfolio/write" element={<SignIn />}></Route>
         </Routes>
       ) : (
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="*" element={<Home />}></Route>
+          <Route path="/signin" element={<Home />}></Route>
           <Route path="/portfolio/write" element={<PortfolioWrite />}></Route>
         </Routes>
       )}
