@@ -1,0 +1,83 @@
+$background: #000;
+$mainFontColor: #fff;
+$cardFontColor: #000;
+$themeColor: rgb(102, 149, 185);
+$font:
+  'IBM Plex Sans KR',
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  'Roboto',
+  'Oxygen',
+  'Ubuntu',
+  'Cantarell',
+  'Fira Sans',
+  'Droid Sans',
+  'Helvetica Neue',
+  sans-serif;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500&display=swap');
+
+html {
+  font-size: 10px;
+}
+
+body {
+  background-color: $background;
+  font-family: $font;
+}
+
+.profile {
+  &__img {
+    width: 130px;
+    height: 130px;
+    background: $themeColor url('/assets/profile.png') no-repeat 0 0;
+    background-size: 100% 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 0 20px;
+    &--center {
+      @extend .profile__img;
+      margin: 0 auto 20px;
+    }
+  }
+  &__txt {
+    font-size: 20px;
+    color: $themeColor;
+    font-weight: 400;
+  }
+
+  &__desc {
+    padding: 16px 0;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+    color: $mainFontColor;
+  }
+
+  &__links {
+    font-size: 20px;
+    display: flex;
+    margin: 1rem 0;
+    color: #000;
+
+    a {
+      background-color: $themeColor;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      color: inherit;
+      margin-left: 0.5rem;
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+
+      &:nth-of-type(1) {
+        margin-left: 0;
+      }
+    }
+  }
+}

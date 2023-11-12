@@ -1,0 +1,48 @@
+@use './common';
+
+.flex {
+  display: flex;
+}
+
+.header {
+  background-color: common.$background;
+  color: common.$mainFontColor;
+  padding: 45px 35px 45px;
+  font-size: 14px;
+  width: 300px;
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  &__inner {
+    display: flex;
+    flex-direction: column;
+  }
+  &__menu-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 27px;
+  }
+  &__menu-item {
+    padding: 0.5rem 0;
+  }
+
+  &__btn-signout {
+    background: none;
+    border: 0;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    margin-left: 0.5rem;
+    font-size: 16px;
+    color: common.$themeColor;
+    font-weight: 400;
+    display: inline-flex;
+  }
+}
