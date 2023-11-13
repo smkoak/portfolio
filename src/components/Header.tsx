@@ -58,9 +58,15 @@ function Header(): JSX.Element {
         </p>
       </div>
       <ul className={styles['header__menu-list']}>
-        <li className={styles['header__menu-item']}>protfolio</li>
-        <li className={styles['header__menu-item']}>about</li>
-        <li className={styles['header__menu-item']}>contact</li>
+        <li className={styles['header__menu-item']}>
+          <Link to="/">protfolio</Link>
+        </li>
+        <li className={styles['header__menu-item']}>
+          <Link to="/about">about</Link>
+        </li>
+        <li className={styles['header__menu-item']}>
+          <Link to="/contact">contact</Link>
+        </li>
       </ul>
     </header>
   );

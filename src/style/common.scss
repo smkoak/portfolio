@@ -27,6 +27,11 @@ body {
   font-family: $font;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 .profile {
   &__img {
     width: 130px;
