@@ -1,46 +1,106 @@
-# Getting Started with Create React App
+# 개인 포트폴리오 페이지
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🌈 프로젝트 소개
 
-## Available Scripts
+개인 포트폴리오 소개를 위한 페이지 입니다.
 
-In the project directory, you can run:
+## ⚙️ 프로젝트 설치 및 실행 방법
 
-### `yarn start`
+```Bash
+# 프로젝트 설치
+yarn install
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 프로젝트 실행
+yarn start
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 🪃 Skills
 
-### `yarn test`
+### Client
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- React
+- React Router Dom
+- Context API
+- React Hooks
+  - useState
+  - useEffect
+  - useContext
+- Style
+  - SCSS
 
-### `yarn build`
+### Database
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Firebase
+  - Authentication
+  - Firestore Database
+  - Storage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Firebase
+  - Hosting
 
-### `yarn eject`
+## 📖 프로젝트 구조
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```Bash
+.
+├── public
+│   ├── assets
+│   ├── favicon-16x16.png
+│   ├── favicon-32x32.png
+│   ├── favicon-96x96.png
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src
+│   ├── assets
+│   │   ├── desktop.png
+│   │   └── profile.png
+│   ├── components
+│   │   ├── AboutContent.tsx
+│   │   ├── ContactContent.tsx
+│   │   ├── Header.tsx
+│   │   ├── Layout.tsx
+│   │   ├── LazyBackground.tsx
+│   │   ├── Loader.tsx
+│   │   ├── PortfolioForm.tsx
+│   │   ├── PortfolioList.tsx
+│   │   └── SignInForm.tsx
+│   ├── context
+│   │   └── AuthContext.tsx
+│   ├── pages
+│   │   ├── About
+│   │   │   └── index.tsx
+│   │   ├── Contact
+│   │   │   └── index.tsx
+│   │   ├── Home
+│   │   │   └── index.tsx
+│   │   ├── Portfolio
+│   │   │   └── Write
+│   │   │       └── index.tsx
+│   │   ├── Router
+│   │   │   └── index.tsx
+│   │   └── SignIn
+│   │       └── index.tsx
+│   ├── style
+│   │   ├── about.module.scss
+│   │   ├── common.scss
+│   │   ├── form.module.scss
+│   │   ├── header.module.scss
+│   │   ├── layout.module.scss
+│   │   └── portfoliolist.module.scss
+│   ├── util
+│   │   └── random.ts
+│   ├── App.tsx
+│   ├── firebaseApp.ts
+│   ├── index.tsx
+│   ├── logo.svg
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   └── setupTests.ts
+├── README.md
+├── package.json
+├── tsconfig.json
+└── yarn.lock
+```
