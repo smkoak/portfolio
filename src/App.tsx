@@ -3,9 +3,11 @@ import Router from 'pages/Router';
 import Layout from 'components/Layout';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from 'firebaseApp';
+import Loader from 'components/Loader';
 
 function App(): JSX.Element {
   const auth = getAuth(app);
+  const [init, setInit] = useState<boolean>(false);
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
     !(auth?.currentUser == null),
   );
@@ -17,13 +19,14 @@ function App(): JSX.Element {
       } else {
         setIsAuthenticated(false);
       }
+      setInit(true);
     });
   }, [auth]);
 
   return (
     <>
       <Layout>
-        <Router isAuthenticated={isAuthenticated} />
+        {init ? <Router isAuthenticated={isAuthenticated} /> : <Loader />}
       </Layout>
     </>
   );

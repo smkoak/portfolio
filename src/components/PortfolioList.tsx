@@ -1,49 +1,90 @@
-import React from 'react';
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import React, { useContext, useEffect, useState } from 'react';
 import Masonry from 'react-masonry-css';
 import styles from '../style/portfoliolist.module.scss';
-import { pick, randomColor } from '../util/random';
+import { Link } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from 'firebaseApp';
+import { randomColor } from 'util/random';
+import AuthContext from 'context/AuthContext';
+
+interface PortfolioProps {
+  title: string;
+  content: string;
+  category: string;
+  createdAt: string;
+  startMonth: string;
+  endMonth: string;
+  screenshot: string;
+  email: string;
+  id: string;
+}
 
 function PortfolioList(): JSX.Element {
-  const numberOfBoxes = 16;
-  const breakpointColumnsObj = {
-    default: 6,
-    2500: 5,
-    2000: 4,
-    1600: 3,
-    1200: 2,
-    600: 1,
+  const { user } = useContext(AuthContext);
+
+  const [portfolios, setPortfolios] = useState<PortfolioProps[]>([]);
+
+  const getPortfolio = async () => {
+    const data = await getDocs(collection(db, 'portfolio'));
+    data.forEach((doc) => {
+      const dataObj = { ...doc.data(), id: doc.id };
+      setPortfolios((prev) => [...prev, dataObj as PortfolioProps]);
+    });
   };
+
+  useEffect(() => {
+    getPortfolio();
+  }, []);
+
+  const breakpointColumnsObj = {
+    default: 4,
+    2500: 3,
+    1600: 2,
+    1100: 1,
+  };
+
   return (
     <div className={styles.container}>
-      <h2 className={styles['head-title']}>Portfolio</h2>
+      <div className={styles.header__wrap}>
+        <h2 className={styles.head__title}>Portfolio</h2>
+        {user != null && (
+          <Link className={styles.head__link} to="/portfolio/write">
+            글쓰기
+          </Link>
+        )}
+      </div>
       <Masonry
         breakpointCols={breakpointColumnsObj}
         className={styles['masonry-grid']}
         columnClassName={styles['masonry-grid_column']}
       >
-        {Array.from({ length: numberOfBoxes }).map((_, index) => (
-          <div key={index} className={styles['masonry-item']}>
-            <div
-              className={styles.screenshot}
-              style={{
-                backgroundColor: randomColor(),
-                height: pick([200, 230, 380, 300, 360, 380]),
-              }}
-            ></div>
-            <div className={styles['masonry-item__meta']}>
-              <span className={styles['masonry-item__category']}>web</span>
-              <span className={styles['masonry-item__date']}>2023.11.07 </span>
-            </div>
-            <h2 className={styles['masonry-item__title']}>
-              transcription, editing, copy: mozilla internet health report 2022
-            </h2>
-            <div className={styles['masonry-item__desc']}>
-              I worked as a researcher and communications consultant with Global
-              Witness on their investigations into misinformation during the
-              2020 Brazilian election and the 2020 midterms in the US.
-            </div>
-          </div>
-        ))}
+        {portfolios?.length > 0
+          ? portfolios?.map((post, index) => (
+              <div
+                key={index}
+                className={styles['masonry-item']}
+                style={{ borderColor: randomColor() }}
+              >
+                <div
+                  className={styles.screenshot}
+                  style={{ backgroundImage: `url(${post?.screenshot})` }}
+                ></div>
+                <div className={styles['masonry-item__meta']}>
+                  <span className={styles['masonry-item__category']}>
+                    {post?.category}
+                  </span>
+                  <span className={styles['masonry-item__date']}>
+                    {post?.startMonth} ~ {post?.endMonth}
+                  </span>
+                </div>
+                <h2 className={styles['masonry-item__title']}>{post?.title}</h2>
+                <div className={styles['masonry-item__desc']}>
+                  {post?.content}
+                </div>
+              </div>
+            ))
+          : '데이터가 없습니다.'}
       </Masonry>
     </div>
   );
