@@ -46,3 +46,23 @@
     display: inline-flex;
   }
 }
+
+@media (max-width: 860px) {
+  .header {
+    position: relative;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .profile__img {
+      margin-bottom: 0;
+    }
+    .header__menu-list {
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+    }
+  }
+}
