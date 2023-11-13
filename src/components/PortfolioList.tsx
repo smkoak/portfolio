@@ -9,6 +9,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'firebaseApp';
 import AuthContext from 'context/AuthContext';
 import Loader from './Loader';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 interface PortfolioProps {
   title: string;
@@ -76,11 +77,12 @@ function PortfolioList(): JSX.Element {
               .map((post, index) => (
                 <div key={post?.id} className={styles['masonry-item']}>
                   <Link to={post?.url} target="_blank">
-                    <div
+                    <LazyLoadImage
+                      src={post?.screenshot}
                       className={styles.screenshot}
-                      style={{ backgroundImage: `url(${post?.screenshot})` }}
-                    ></div>
-
+                      alt={post?.title}
+                      effect="blur"
+                    />
                     <h2 className={styles['masonry-item__title']}>
                       {post?.title}
                     </h2>

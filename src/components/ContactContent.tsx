@@ -10,6 +10,14 @@ function ContactContent() {
       </div>
       <dl className={styles.contact__list}>
         <div>
+          <dt>LinkedIn</dt>
+          <dd>
+            <Link to="https://linkedin.com/in/smkoak" target="_blank">
+              https://linkedin.com/in/smkoak/
+            </Link>
+          </dd>
+        </div>
+        <div>
           <dt>Email</dt>
           <dd>
             <Link to={'mailto:smkoak@gmail.com'}>smkoak@gmail.com</Link>

@@ -31,15 +31,15 @@ function Header(): JSX.Element {
       </Link>
       <div>
         <div className={styles.profile__links}>
-          <a href="#">
+          <Link to="https://www.linkedin.com/in/smkoak" target="_blank">
             <GrLinkedinOption />
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="mailto:smkoak@gmail.com">
             <AiOutlineMail />
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="https://github.com/smkoak" target="_blank">
             <AiFillGithub />
-          </a>
+          </Link>
         </div>
         <div className={styles.flex}>
           <h1 className={styles.profile__txt}>Sunmin Koak</h1>
