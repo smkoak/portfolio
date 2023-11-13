@@ -1,7 +1,7 @@
 $background: #000;
 $mainFontColor: #fff;
 $cardFontColor: #000;
-$themeColor: rgb(102, 149, 185);
+$themeColor: rgb(60, 124, 173);
 $font:
   'IBM Plex Sans KR',
   -apple-system,
@@ -43,7 +43,7 @@ body {
     }
   }
   &__txt {
-    font-size: 20px;
+    font-size: 26px;
     color: $themeColor;
     font-weight: 400;
     margin-top: 10px;
@@ -97,6 +97,10 @@ body {
   align-items: center;
   color: $mainFontColor;
   font-size: 50px;
+
+  &.opacity {
+    background: transparent;
+  }
   .icons {
     // infinite rotate transition
     transform: rotate(360deg);

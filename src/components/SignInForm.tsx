@@ -59,7 +59,7 @@ export default function LoginForm(): JSX.Element {
   };
 
   return (
-    <div className={styles.form__wrapper}>
+    <div className={styles['form__wrapper--center']}>
       <Link to="/">
         <div className={styles.profile__img}></div>
       </Link>

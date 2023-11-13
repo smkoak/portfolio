@@ -8,6 +8,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import styles from 'style/header.module.scss';
 import { toast } from 'react-toastify';
 import AuthContext from 'context/AuthContext';
+import { Link } from 'react-router-dom';
 
 function Header(): JSX.Element {
   const { user } = useContext(AuthContext);
@@ -25,7 +26,9 @@ function Header(): JSX.Element {
 
   return (
     <header className={styles.header}>
-      <div className={styles.profile__img}></div>
+      <Link to="/">
+        <div className={styles.profile__img}></div>
+      </Link>
       <div>
         <div className={styles.profile__links}>
           <a href="#">

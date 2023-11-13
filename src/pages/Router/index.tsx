@@ -1,5 +1,4 @@
-import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import React, { Navigate, Route, Routes } from 'react-router-dom';
 import Home from '../Home';
 import SignIn from 'pages/SignIn';
 import PortfolioWrite from 'pages/Portfolio/Write';

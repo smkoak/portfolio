@@ -39,10 +39,10 @@
 }
 
 .head__title {
-  font-size: 20px;
-  font-weight: 400;
+  font-size: 22px;
+  font-weight: 500;
   text-decoration: none;
-  color: common.$mainFontColor;
+  color: common.$themeColor;
 }
 
 .list {
@@ -71,14 +71,19 @@
   box-sizing: border-box;
   position: relative;
   overflow: hidden;
-  background-color: common.$mainFontColor;
+  background-color: common.$themeColor;
   border-radius: 8px;
+  color: common.$mainFontColor;
+  transition: all 0.3s ease-in-out;
 
+  &:hover {
+    transform: translateY(-5px);
+  }
   a {
     text-decoration: none;
     padding: 0 0 20px;
     display: block;
-    color: common.$cardFontColor;
+    color: common.$mainFontColor;
 
     &:after {
       content: '';
@@ -97,7 +102,7 @@
         opacity: 1;
       }
       .masonry-item__link-icon {
-        opacity: 0.4;
+        opacity: 0.9;
         z-index: 1;
       }
       .screenshot {
@@ -108,34 +113,51 @@
 
   &__meta {
     font-size: 12px;
-    margin: 10px 30px;
+    margin: 10px 20px;
+    font-weight: 400;
+    z-index: 1;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
   }
 
   &__date {
     margin-left: 10px;
+
+    &:before {
+      content: '|';
+      margin-right: 10px;
+    }
+
+    svg {
+      font-size: 15px;
+      vertical-align: bottom;
+    }
   }
 
   &__title {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.4;
-    font-weight: 400;
+    font-weight: 600;
     text-decoration: none;
-    color: common.$cardFontColor;
-    margin: 10px 30px;
+    margin: 10px 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: keep-all;
+    z-index: 10;
+    position: relative;
   }
   &__desc {
-    font-size: 14px;
-    line-height: 1.4;
-    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.3;
+    font-weight: 300;
     text-decoration: none;
-    color: common.$cardFontColor;
-    margin: 10px 30px;
+    margin: 10px 20px;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: keep-all;
+    z-index: 1;
+    position: relative;
   }
   &__link-icon {
     font-size: 80px;
@@ -165,6 +187,7 @@
   align-items: center;
   position: relative;
   transition: all 5s ease-in-out;
+  background-color: #000;
 }
 
 @media (max-width: 860px) {

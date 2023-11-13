@@ -1,9 +1,13 @@
 import React from 'react';
 import { TailSpin } from 'react-loading-icons';
 
-export default function Loader(): JSX.Element {
+interface Props {
+  opacity?: boolean;
+}
+
+export default function Loader({ opacity }: Props): JSX.Element {
   return (
-    <div className="loader">
+    <div className={`loader ${(opacity ?? true) && 'opacity'}`}>
       <div className="icons">
         <TailSpin strokeOpacity={1} speed={2.5} />
       </div>

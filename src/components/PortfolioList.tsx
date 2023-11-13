@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useEffect, useState } from 'react';
 import { RiExternalLinkLine } from 'react-icons/ri';
+import { CiCalendarDate } from 'react-icons/ci';
 import Masonry from 'react-masonry-css';
 import styles from '../style/portfoliolist.module.scss';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'firebaseApp';
 import AuthContext from 'context/AuthContext';
+import Loader from './Loader';
 
 interface PortfolioProps {
   title: string;
@@ -25,6 +27,7 @@ function PortfolioList(): JSX.Element {
   const { user } = useContext(AuthContext);
 
   const [portfolios, setPortfolios] = useState<PortfolioProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getPortfolio = async () => {
     const data = await getDocs(collection(db, 'portfolio'));
@@ -35,12 +38,14 @@ function PortfolioList(): JSX.Element {
   };
 
   useEffect(() => {
-    getPortfolio();
+    getPortfolio().then(() => {
+      setLoading(true);
+    });
   }, []);
 
   const breakpointColumnsObj = {
     default: 4,
-    2500: 3,
+    3200: 3,
     1600: 2,
     1100: 1,
   };
@@ -76,19 +81,19 @@ function PortfolioList(): JSX.Element {
                       style={{ backgroundImage: `url(${post?.screenshot})` }}
                     ></div>
 
-                    <div className={styles['masonry-item__meta']}>
-                      <span className={styles['masonry-item__category']}>
-                        {post?.category}
-                      </span>
-                      <span className={styles['masonry-item__date']}>
-                        {post?.startMonth} ~ {post?.endMonth}
-                      </span>
-                    </div>
                     <h2 className={styles['masonry-item__title']}>
                       {post?.title}
                     </h2>
                     <div className={styles['masonry-item__desc']}>
                       {post?.content}
+                    </div>
+                    <div className={styles['masonry-item__meta']}>
+                      <span className={styles['masonry-item__category']}>
+                        {post?.category}
+                      </span>
+                      <span className={styles['masonry-item__date']}>
+                        <CiCalendarDate /> {post?.startMonth} ~ {post?.endMonth}
+                      </span>
                     </div>
                     <div className={styles['masonry-item__link-icon']}>
                       <RiExternalLinkLine />
@@ -98,6 +103,7 @@ function PortfolioList(): JSX.Element {
               ))
           : '데이터가 없습니다.'}
       </Masonry>
+      {!loading && <Loader opacity={true} />}
     </div>
   );
 }
