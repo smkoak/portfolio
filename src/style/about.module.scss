@@ -1,0 +1,70 @@
+@use 'common';
+
+.container {
+  padding: 50px 30px 0;
+  flex-grow: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  color: common.$mainFontColor;
+}
+
+.header__wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.head__title {
+  font-size: 22px;
+  font-weight: 500;
+  text-decoration: none;
+  color: common.$themeColor;
+}
+
+.header__middle {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 50px 0 20px;
+  color: common.$themeColor;
+}
+
+.header__content {
+  font-size: 18px;
+  line-height: 1.6;
+  color: common.$mainFontColor;
+}
+
+.introduce__title {
+  max-width: 800px;
+  word-break: keep-all;
+}
+
+.career__list {
+  margin: 0 0 50px;
+}
+
+.contact__list {
+  margin-top: 100px;
+  div {
+    margin-bottom: 50px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  dt {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  dd {
+    font-size: 18px;
+    font-weight: 300;
+  }
+}
+
+@media (max-width: 860px) {
+  .introduce__title {
+    width: 100%;
+    max-width: 100%;
+  }
+}
