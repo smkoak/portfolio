@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import React, { useContext, useEffect, useState } from 'react';
+import { RiExternalLinkLine } from 'react-icons/ri';
 import Masonry from 'react-masonry-css';
 import styles from '../style/portfoliolist.module.scss';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'firebaseApp';
-import { randomColor } from 'util/random';
 import AuthContext from 'context/AuthContext';
 
 interface PortfolioProps {
@@ -18,6 +18,7 @@ interface PortfolioProps {
   screenshot: string;
   email: string;
   id: string;
+  url: string;
 }
 
 function PortfolioList(): JSX.Element {
@@ -60,30 +61,41 @@ function PortfolioList(): JSX.Element {
         columnClassName={styles['masonry-grid_column']}
       >
         {portfolios?.length > 0
-          ? portfolios?.map((post, index) => (
-              <div
-                key={index}
-                className={styles['masonry-item']}
-                style={{ borderColor: randomColor() }}
-              >
-                <div
-                  className={styles.screenshot}
-                  style={{ backgroundImage: `url(${post?.screenshot})` }}
-                ></div>
-                <div className={styles['masonry-item__meta']}>
-                  <span className={styles['masonry-item__category']}>
-                    {post?.category}
-                  </span>
-                  <span className={styles['masonry-item__date']}>
-                    {post?.startMonth} ~ {post?.endMonth}
-                  </span>
+          ? // startMonth 순으로 정렬
+            portfolios
+              ?.sort((a, b) => {
+                if (a.startMonth > b.startMonth) return -1;
+                if (a.startMonth < b.startMonth) return 1;
+                return 0;
+              })
+              .map((post, index) => (
+                <div key={post?.id} className={styles['masonry-item']}>
+                  <Link to={post?.url} target="_blank">
+                    <div
+                      className={styles.screenshot}
+                      style={{ backgroundImage: `url(${post?.screenshot})` }}
+                    ></div>
+
+                    <div className={styles['masonry-item__meta']}>
+                      <span className={styles['masonry-item__category']}>
+                        {post?.category}
+                      </span>
+                      <span className={styles['masonry-item__date']}>
+                        {post?.startMonth} ~ {post?.endMonth}
+                      </span>
+                    </div>
+                    <h2 className={styles['masonry-item__title']}>
+                      {post?.title}
+                    </h2>
+                    <div className={styles['masonry-item__desc']}>
+                      {post?.content}
+                    </div>
+                    <div className={styles['masonry-item__link-icon']}>
+                      <RiExternalLinkLine />
+                    </div>
+                  </Link>
                 </div>
-                <h2 className={styles['masonry-item__title']}>{post?.title}</h2>
-                <div className={styles['masonry-item__desc']}>
-                  {post?.content}
-                </div>
-              </div>
-            ))
+              ))
           : '데이터가 없습니다.'}
       </Masonry>
     </div>
