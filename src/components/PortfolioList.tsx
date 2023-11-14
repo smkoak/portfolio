@@ -10,6 +10,7 @@ import { db } from 'firebaseApp';
 import AuthContext from 'context/AuthContext';
 import Loader from './Loader';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 interface PortfolioProps {
   title: string;
@@ -76,31 +77,63 @@ function PortfolioList(): JSX.Element {
               })
               .map((post, index) => (
                 <div key={post?.id} className={styles['masonry-item']}>
-                  <Link to={post?.url} target="_blank">
-                    <LazyLoadImage
-                      src={post?.screenshot}
-                      className={styles.screenshot}
-                      alt={post?.title}
-                      effect="blur"
-                    />
-                    <h2 className={styles['masonry-item__title']}>
-                      {post?.title}
-                    </h2>
-                    <div className={styles['masonry-item__desc']}>
-                      {post?.content}
-                    </div>
-                    <div className={styles['masonry-item__meta']}>
-                      <span className={styles['masonry-item__category']}>
-                        {post?.category}
-                      </span>
-                      <span className={styles['masonry-item__date']}>
-                        <CiCalendarDate /> {post?.startMonth} ~ {post?.endMonth}
-                      </span>
-                    </div>
-                    <div className={styles['masonry-item__link-icon']}>
-                      <RiExternalLinkLine />
-                    </div>
-                  </Link>
+                  {post?.url !== '' ? (
+                    <Link to={post?.url} target="_blank">
+                      <LazyLoadImage
+                        src={post?.screenshot}
+                        placeholderSrc={post?.screenshot}
+                        className={styles.screenshot}
+                        alt={post?.title}
+                        effect="blur"
+                      />
+                      <h2 className={styles['masonry-item__title']}>
+                        {post?.title}
+                      </h2>
+                      <div className={styles['masonry-item__desc']}>
+                        {post?.content}
+                      </div>
+                      <div className={styles['masonry-item__meta']}>
+                        <span className={styles['masonry-item__category']}>
+                          {post?.category}
+                        </span>
+                        <span className={styles['masonry-item__date']}>
+                          <CiCalendarDate /> {post?.startMonth} ~{' '}
+                          {post?.endMonth}
+                        </span>
+                      </div>
+                      <div className={styles['masonry-item__link-icon']}>
+                        <RiExternalLinkLine />
+                      </div>
+                    </Link>
+                  ) : (
+                    <>
+                      <LazyLoadImage
+                        src={post?.screenshot}
+                        placeholderSrc={post?.screenshot}
+                        className={styles.screenshot}
+                        alt={post?.title}
+                        effect="blur"
+                      />
+                      <h2 className={styles['masonry-item__title']}>
+                        {post?.title}
+                      </h2>
+                      <div className={styles['masonry-item__desc']}>
+                        {post?.content}
+                      </div>
+                      <div className={styles['masonry-item__meta']}>
+                        <span className={styles['masonry-item__category']}>
+                          {post?.category}
+                        </span>
+                        <span className={styles['masonry-item__date']}>
+                          <CiCalendarDate /> {post?.startMonth} ~{' '}
+                          {post?.endMonth}
+                        </span>
+                      </div>
+                      <div className={styles['masonry-item__link-icon']}>
+                        <RiExternalLinkLine />
+                      </div>
+                    </>
+                  )}
                 </div>
               ))
           : '데이터가 없습니다.'}

@@ -1,8 +1,6 @@
 @use './common.scss';
 
 .masonry-grid {
-  display: -webkit-box; /* Not needed if autoprefixing */
-  display: -ms-flexbox; /* Not needed if autoprefixing */
   display: flex;
   margin-left: -30px; /* gutter size offset */
   width: auto;
@@ -13,7 +11,6 @@
   position: relative;
 }
 
-/* Style your items */
 .masonry-grid_column > div {
   margin-bottom: 30px;
 }
@@ -21,7 +18,6 @@
 .container {
   padding: 50px 30px 0;
   flex-grow: 1;
-  min-width: 500px;
   width: calc(100% - 360px);
 }
 
@@ -106,7 +102,9 @@
         z-index: 1;
       }
       .screenshot {
-        transform: scale(1.1);
+        img {
+          transform: scale(1.1);
+        }
       }
     }
   }
@@ -179,15 +177,18 @@
   background-repeat: no-repeat;
   background-position: 50% 0;
   background-size: cover;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   font-size: 0;
   color: rgba(0, 0, 0, 0);
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  transition: all 5s ease-in-out;
   background-color: #000;
+
+  img {
+    transition: all 5s ease-in-out;
+  }
 }
 
 @media (max-width: 860px) {
