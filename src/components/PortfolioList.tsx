@@ -40,10 +40,8 @@ function PortfolioList(): JSX.Element {
   };
 
   useEffect(() => {
-    getPortfolio().then(() => {
-      setLoading(true);
-    });
-  }, []);
+    getPortfolio();
+  }, [db]);
 
   const breakpointColumnsObj = {
     default: 4,
@@ -85,6 +83,9 @@ function PortfolioList(): JSX.Element {
                         className={styles.screenshot}
                         alt={post?.title}
                         effect="blur"
+                        onLoad={() => {
+                          setLoading(true);
+                        }}
                       />
                       <h2 className={styles['masonry-item__title']}>
                         {post?.title}
@@ -138,7 +139,7 @@ function PortfolioList(): JSX.Element {
               ))
           : '데이터가 없습니다.'}
       </Masonry>
-      {!loading && <Loader opacity={true} />}
+      {!loading && <Loader opacity={false} />}
     </div>
   );
 }
