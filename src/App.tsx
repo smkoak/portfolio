@@ -4,6 +4,7 @@ import Layout from 'components/Layout';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { app } from 'firebaseApp';
 import Loader from 'components/Loader';
+import 'style/common.scss';
 
 function App(): JSX.Element {
   const auth = getAuth(app);
