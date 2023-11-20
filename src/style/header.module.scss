@@ -5,9 +5,8 @@
 }
 
 .header {
-  background-color: common.$background;
   color: common.$mainFontColor;
-  padding: 45px 20px 45px;
+  padding: 45px 35px 45px;
   font-size: 14px;
   width: 300px;
   box-sizing: border-box;
@@ -52,6 +51,7 @@
   .header {
     position: relative;
     flex-direction: row;
+    padding: 45px 20px 45px;
     width: 100%;
     gap: 20px;
     align-items: center;
@@ -67,3 +67,5 @@
     }
   }
 }
+
+

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'firebaseApp';
 import AuthContext from 'context/AuthContext';
-import Loader from './Loader';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import 'react-lazy-load-image-component/src/effects/blur.css';
 
@@ -29,7 +28,6 @@ function PortfolioList(): JSX.Element {
   const { user } = useContext(AuthContext);
 
   const [portfolios, setPortfolios] = useState<PortfolioProps[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
 
   const getPortfolio = async () => {
     const data = await getDocs(collection(db, 'portfolio'));
@@ -40,7 +38,9 @@ function PortfolioList(): JSX.Element {
   };
 
   useEffect(() => {
-    getPortfolio();
+    if (portfolios.length === 0) {
+      getPortfolio();
+    }
   }, [db]);
 
   const breakpointColumnsObj = {
@@ -65,81 +65,72 @@ function PortfolioList(): JSX.Element {
         className={styles['masonry-grid']}
         columnClassName={styles['masonry-grid_column']}
       >
-        {portfolios?.length > 0
-          ? // startMonth 순으로 정렬
-            portfolios
-              ?.sort((a, b) => {
-                if (a.startMonth > b.startMonth) return -1;
-                if (a.startMonth < b.startMonth) return 1;
-                return 0;
-              })
-              .map((post, index) => (
-                <div key={post?.id} className={styles['masonry-item']}>
-                  {post?.url !== '' ? (
-                    <Link to={post?.url} target="_blank">
-                      <LazyLoadImage
-                        src={post?.screenshot}
-                        placeholderSrc={post?.screenshot}
-                        className={styles.screenshot}
-                        alt={post?.title}
-                        effect="blur"
-                        onLoad={() => {
-                          setLoading(true);
-                        }}
-                      />
-                      <h2 className={styles['masonry-item__title']}>
-                        {post?.title}
-                      </h2>
-                      <div className={styles['masonry-item__desc']}>
-                        {post?.content}
-                      </div>
-                      <div className={styles['masonry-item__meta']}>
-                        <span className={styles['masonry-item__category']}>
-                          {post?.category}
-                        </span>
-                        <span className={styles['masonry-item__date']}>
-                          <CiCalendarDate /> {post?.startMonth} ~{' '}
-                          {post?.endMonth}
-                        </span>
-                      </div>
-                      <div className={styles['masonry-item__link-icon']}>
-                        <RiExternalLinkLine />
-                      </div>
-                    </Link>
-                  ) : (
-                    <>
-                      <LazyLoadImage
-                        src={post?.screenshot}
-                        placeholderSrc={post?.screenshot}
-                        className={styles.screenshot}
-                        alt={post?.title}
-                        effect="blur"
-                      />
-                      <h2 className={styles['masonry-item__title']}>
-                        {post?.title}
-                      </h2>
-                      <div className={styles['masonry-item__desc']}>
-                        {post?.content}
-                      </div>
-                      <div className={styles['masonry-item__meta']}>
-                        <span className={styles['masonry-item__category']}>
-                          {post?.category}
-                        </span>
-                        <span className={styles['masonry-item__date']}>
-                          <CiCalendarDate /> {post?.startMonth} ~{' '}
-                          {post?.endMonth}
-                        </span>
-                      </div>
-                      <div className={styles['masonry-item__link-icon']}>
-                        <RiExternalLinkLine />
-                      </div>
-                    </>
-                  )}
-                </div>
-              ))
-          : '데이터가 없습니다.'}
+        {portfolios
+          ?.sort((a, b) => {
+            if (a.startMonth > b.startMonth) return -1;
+            if (a.startMonth < b.startMonth) return 1;
+            return 0;
+          })
+          .map((post, index) => (
+            <div key={post?.id} className={styles['masonry-item']}>
+              {post?.url !== '' ? (
+                <Link to={post?.url} target="_blank">
+                  <LazyLoadImage
+                    src={post?.screenshot}
+                    placeholderSrc={post?.screenshot}
+                    className={styles.screenshot}
+                    alt={post?.title}
+                    effect="blur"
+                  />
+                  <h2 className={styles['masonry-item__title']}>
+                    {post?.title}
+                  </h2>
+                  <div className={styles['masonry-item__desc']}>
+                    {post?.content}
+                  </div>
+                  <div className={styles['masonry-item__meta']}>
+                    <span className={styles['masonry-item__category']}>
+                      {post?.category}
+                    </span>
+                    <span className={styles['masonry-item__date']}>
+                      <CiCalendarDate /> {post?.startMonth} ~ {post?.endMonth}
+                    </span>
+                  </div>
+                  <div className={styles['masonry-item__link-icon']}>
+                    <RiExternalLinkLine />
+                  </div>
+                </Link>
+              ) : (
+                <>
+                  <LazyLoadImage
+                    src={post?.screenshot}
+                    placeholderSrc={post?.screenshot}
+                    className={styles.screenshot}
+                    alt={post?.title}
+                    effect="blur"
+                  />
+                  <h2 className={styles['masonry-item__title']}>
+                    {post?.title}
+                  </h2>
+                  <div className={styles['masonry-item__desc']}>
+                    {post?.content}
+                  </div>
+                  <div className={styles['masonry-item__meta']}>
+                    <span className={styles['masonry-item__category']}>
+                      {post?.category}
+                    </span>
+                    <span className={styles['masonry-item__date']}>
+                      <CiCalendarDate /> {post?.startMonth} ~ {post?.endMonth}
+                    </span>
+                  </div>
+                  <div className={styles['masonry-item__link-icon']}>
+                    <RiExternalLinkLine />
+                  </div>
+                </>
+              )}
+            </div>
+          ))}
       </Masonry>
-      {!loading && <Loader opacity={false} />}
     </div>
   );
 }

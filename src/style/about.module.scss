@@ -17,14 +17,14 @@
 
 .head__title {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   text-decoration: none;
   color: common.$themeColor;
 }
 
 .header__middle {
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
   margin: 50px 0 20px;
   color: common.$themeColor;
 }
@@ -32,6 +32,7 @@
 .header__content {
   font-size: 18px;
   line-height: 1.6;
+  font-weight: 200;
   color: common.$mainFontColor;
 }
 
@@ -53,8 +54,9 @@
     align-items: center;
   }
   dt {
-    font-weight: 500;
+    font-weight: 300;
     font-size: 20px;
+    color: common.$themeColor;
   }
   dd {
     font-size: 18px;
@@ -66,5 +68,8 @@
   .introduce__title {
     width: 100%;
     max-width: 100%;
+  }
+  .container {
+    padding: 0 20px;
   }
 }

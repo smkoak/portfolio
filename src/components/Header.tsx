@@ -54,7 +54,7 @@ function Header(): JSX.Element {
           )}
         </div>
         <p className={styles.profile__desc}>
-          I&apos;m a Frontend Developer who builds things for the web.
+          I&apos;m a Frontend Developer who builds nice things for the web.
         </p>
       </div>
       <ul className={styles['header__menu-list']}>
